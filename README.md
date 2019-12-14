@@ -77,3 +77,9 @@ cd ~/.le
     * run 'update' if settings file does exist
 1. improve reporting and error handling
     * currently there is none..
+
+## References
+* [letsencrypt privkey.pem is the key file](https://stackoverflow.com/questions/50389883/generate-crt-key-ssl-files-from-lets-encrypt-from-scratch)
+* [configure sophos xg for API access](https://techbast.com/2019/10/sophos-xg-firewall-how-to-use-api.html)
+* [upload certificates to Sophos XG using API](https://community.sophos.com/products/xg-firewall/f/sophos-xg-firewall-general-discussion/102208/upload-certificate-using-api)
+* [api access should use passwordform="plain"](https://community.sophos.com/products/xg-firewall/sfos-eap/v16/f/sfos-v16-beta-issues-bugs/79383/api-login-with-encrypted-password/320699)
