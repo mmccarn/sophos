@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Request APIVersion="1702.1">
+
+<!-- Authenticate -->
+  <Login>
+    <Username>APIUSER</Username>
+    <Password passwordform="plain">APIPLAINPASS</Password>
+  </Login>
+
+<!-- Upload Letsencrypt Certificate Authority -->
+  <Set operation="OPERATION">
+    <CertificateAuthority>
+      <Name>LetsEncrypt</Name>
+      <Format>PEM</Format>
+      <CACertFile>chain.pem</CACertFile>
+      <CAPrivateKeyFile></CAPrivateKeyFile>
+      <Password></Password>
+    </CertificateAuthority>
+  </Set>
+
+<!-- Upload Cert -->
+  <Set operation="OPERATION">
+    <Certificate>
+      <Action>UploadCertificate</Action>
+      <Name>LEDOMAIN</Name>
+      <CertificateFormat>pem</CertificateFormat>
+      <CertificateFile>fullchain.pem</CertificateFile>
+      <PrivateKeyFile>privkey.key</PrivateKeyFile>
+    </Certificate>
+  </Set>
+</Request>
