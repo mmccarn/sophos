@@ -69,8 +69,19 @@ cd ~/.le
 ./le2xg.sh
 ```
 
+#### Schedule automatic updates
+[untested]
+certbot's "--post-hook" allows you to specify a script to run if your certificate was updated.
+
+To update the Sophos XG any time the LetsEncrypt certificate is renewed, add "--post-hook" to your existing cron job
+
+```
+# m h  dom mon dow   command
+ 30 2   *   *   *    /usr/bin/certbot renew --post-hook /root/.le/le2xg.sh >> /var/log/le-renew.log
+```
+
 ## Todo
-1. document procedures for scheduling
+1. [in progress] document procedures for scheduling
 1. move settings to a separate file
     * prompt for settings on first run
     * run 'add' if settings file does not exist
