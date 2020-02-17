@@ -33,8 +33,6 @@ OPERATION=${1:-update}
 #    - listing the 3 files to be uploaded in the order they occur in the input
 # 4. Delete the copy of privkey.pem that was created
 
-cp "/etc/letsencrypt/live/$LEDOMAIN/privkey.pem" ./privkey.key
-
 sed \
                 -e "s/APIUSER/$APIUSER/" \
                 -e "s/APIPLAINPASS/$APIPLAINPASS/" \
@@ -43,7 +41,5 @@ sed \
 | curl -k -F "reqxml=<-" \
   -F file=@/etc/letsencrypt/live/$LEDOMAIN/chain.pem \
   -F file=@/etc/letsencrypt/live/$LEDOMAIN/fullchain.pem \
-  -F file=@./privkey.key \
+  -F file=@/etc/letsencrypt/live/$LEDOMAIN/privkey.pem \
   "https://$ROUTER/webconsole/APIController?"
-
-rm ./privkey.key
