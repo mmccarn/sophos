@@ -13,7 +13,7 @@ Notes &amp; Tools related to sophos products
 
 #### create a secure directory on your Ubuntu server
 
-This folder will contain a script with your firewall's API password in plain text, and will also briefly contain a copy of your server's private key.
+This folder will contain a script with your firewall's API password in plain text.
 
 Create the folder and set the permissions to '700' (as used by certbot for /etc/letsencrypt/accounts):
 
@@ -51,9 +51,10 @@ edit le2xg.sh and set the values that are specific to your network
 * ROUTER 
 * APIUSER
 * APIPLAINPASS
+* XML
 * LEDOMAIN
 
-Note that the Sophos API documentation examples only included encrypted passwords, but searching online shows that there is no way for you to discover the correct value to use for this. The example I found on how to find the encrypted password indicates that I need to click on a link in the Sophos User Admin screen that does not exist.  I also found bugs indicating the the encrypted password function doesn't work.
+The Sophos API documentation examples include only encrypted passwords, but searching online shows that there is no way for you to discover the correct value to use for this. The example I found on how to find the encrypted password indicates that I need to click on a link in the Sophos User Admin screen that does not exist.  I also found bugs indicating the the encrypted password function doesn't work.
 
 #### Create the Certificate entries in your XG
 ```
@@ -71,17 +72,19 @@ cd ~/.le
 
 #### Schedule automatic updates
 [untested]
-certbot's "--post-hook" allows you to specify a script to run if your certificate was updated.
+certbot's "--deploy-hook" allows you to specify a script to run if your certificate was successfully updated.
 
-To update the Sophos XG any time the LetsEncrypt certificate is renewed, add "--post-hook" to your existing cron job
+To update the Sophos XG any time the LetsEncrypt certificate is renewed, add "--deploy-hook" to your existing cron job
 
 ```
 # m h  dom mon dow   command
- 30 2   *   *   *    /usr/bin/certbot renew --post-hook /root/.le/le2xg.sh >> /var/log/le-renew.log
+ 30 2   *   *   *    /usr/bin/certbot renew --deploy-hook /root/.le/le2xg.sh >> /var/log/le-renew.log
 ```
 
 ## Todo
 1. [in progress] document procedures for scheduling
+1. add 'test' function to test API connection to sophos
+1. document use of /etc/letsencrypt/renewal-hooks/deploy
 1. move settings to a separate file
     * prompt for settings on first run
     * run 'add' if settings file does not exist
