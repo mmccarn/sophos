@@ -14,9 +14,6 @@ ROUTER=192.168.200.1:4444
 APIUSER=my-api-user
 APIPLAINPASS=my-api-password
 
-# Complete path to xgxml.txt
-XML=/root/.le/xgxml.txt
-
 # Letsencrypt domain
 # look in /etc/letsencrypt/live
 LEDOMAIN=cloud.mmsionline.us
@@ -33,13 +30,17 @@ OPERATION=${1:-update}
 #    - listing the 3 files to be uploaded in the order they occur in the input
 # 4. Delete the copy of privkey.pem that was created
 
+cp "/etc/letsencrypt/live/$LEDOMAIN/privkey.pem" ./privkey.key
+
 sed \
                 -e "s/APIUSER/$APIUSER/" \
                 -e "s/APIPLAINPASS/$APIPLAINPASS/" \
                 -e "s/OPERATION/$OPERATION/" \
-                -e "s/LEDOMAIN/$LEDOMAIN/" ${XML} \
+                -e "s/LEDOMAIN/$LEDOMAIN/" xgxml.txt \
 | curl -k -F "reqxml=<-" \
   -F file=@/etc/letsencrypt/live/$LEDOMAIN/chain.pem \
   -F file=@/etc/letsencrypt/live/$LEDOMAIN/fullchain.pem \
-  -F file=@/etc/letsencrypt/live/$LEDOMAIN/privkey.pem \
+  -F file=@./privkey.key \
   "https://$ROUTER/webconsole/APIController?"
+
+rm ./privkey.key
