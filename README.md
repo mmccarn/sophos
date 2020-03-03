@@ -72,9 +72,11 @@ cd ~/.le
 
 #### Schedule automatic updates
 [untested]
-certbot's "--deploy-hook" allows you to specify a script to run if your certificate was successfully updated.
+~~certbot's "--deploy-hook" allows you to specify a script to run if your certificate was successfully updated.~~
 
-To update the Sophos XG any time the LetsEncrypt certificate is renewed, add "--deploy-hook" to your existing cron job
+~~To update the Sophos XG any time the LetsEncrypt certificate is renewed, add "--deploy-hook" to your existing cron job~~
+
+2020-03-03 - using "--deply-hook" with certbot broke the certs completely on my sophos, completely disabling web access to the device.  I had to use ssh and the CLI to restore the default certs and reboot the firewall before I could get back to the web interface.
 
 ```
 # m h  dom mon dow   command
