@@ -25,4 +25,4 @@ Create a Web filtering exception for 'tools.google.com' and 'dl.google.com'
     
     * Click 'Save' at the bottom left
     
-    
+    [screenshot](img/sophos%20xg%20google%20chrome%20exception.png?raw=true)
