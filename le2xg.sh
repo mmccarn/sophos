@@ -21,10 +21,13 @@ XML=/root/.le/xgxml.txt
 # look in /etc/letsencrypt/live
 LEDOMAIN=cloud.mmsionline.us
 
+# cert date
+CERTDATE=$(find /etc/letsencrypt/live/${LEDOMAIN}/privkey.pem -printf "%CY%Cm%Cd\n")
+
 # XG Operation
 #     add: this must be used once to initiate the certificate on the XG
 #  update: this is used for updating the cert once it has been created
-OPERATION=${1:-update}
+OPERATION=${1:-add}
 
 # Overview -
 # 1. copy & rename letsencrypt 'privkey.pem' to 'privkey.key'
@@ -36,10 +39,10 @@ OPERATION=${1:-update}
 cp "/etc/letsencrypt/live/$LEDOMAIN/privkey.pem" ./privkey.key
 
 sed \
-                -e "s/APIUSER/$APIUSER/" \
-                -e "s/APIPLAINPASS/$APIPLAINPASS/" \
-                -e "s/OPERATION/$OPERATION/" \
-                -e "s/LEDOMAIN/$LEDOMAIN/" ${XML} \
+  -e "s/APIUSER/$APIUSER/" \
+  -e "s/APIPLAINPASS/$APIPLAINPASS/" \
+  -e "s/OPERATION/$OPERATION/" \
+  -e "s/LEDOMAIN/$LEDOMAIN-$CERTDATE/" ${XML} \
 | curl -k -F "reqxml=<-" \
   -F file=@/etc/letsencrypt/live/$LEDOMAIN/chain.pem \
   -F file=@/etc/letsencrypt/live/$LEDOMAIN/fullchain.pem \
