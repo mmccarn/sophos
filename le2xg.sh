@@ -43,6 +43,7 @@ sed \
   -e "s/APIPLAINPASS/$APIPLAINPASS/" \
   -e "s/OPERATION/$OPERATION/" \
   -e "s/LEDOMAIN/$LEDOMAIN-$CERTDATE/" ${XML} \
+  -e "s/LECertAuth/$LECertAuth-$CERTDATE/" ${XML} \
 | curl -k -F "reqxml=<-" \
   -F file=@/etc/letsencrypt/live/$LEDOMAIN/chain.pem \
   -F file=@/etc/letsencrypt/live/$LEDOMAIN/fullchain.pem \
