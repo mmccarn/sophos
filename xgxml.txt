@@ -10,7 +10,7 @@
 <!-- Upload Letsencrypt Certificate Authority -->
   <Set operation="OPERATION">
     <CertificateAuthority>
-      <Name>LetsEncrypt</Name>
+      <Name>LECertAuth</Name>
       <Format>PEM</Format>
       <CACertFile>chain.pem</CACertFile>
       <CAPrivateKeyFile></CAPrivateKeyFile>
