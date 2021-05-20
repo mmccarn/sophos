@@ -22,7 +22,7 @@ XML=/root/.le/xgxml.txt
 LEDOMAIN=cloud.mmsionline.us
 
 # Letsencrypt CertificateAuthority
-# CA will be created in Sophos as ${LECertAuth}-yymmdd
+# CA will be created in Sophos as ${LECertAuth}-yyyymmdd
 LECertAuth=LE
 
 # cert date
