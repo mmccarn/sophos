@@ -21,6 +21,10 @@ XML=/root/.le/xgxml.txt
 # look in /etc/letsencrypt/live
 LEDOMAIN=cloud.mmsionline.us
 
+# Letsencrypt CertificateAuthority
+# CA will be created in Sophos as ${LECertAuth}-yymmdd
+LECertAuth=LE
+
 # cert date
 CERTDATE=$(find /etc/letsencrypt/live/${LEDOMAIN}/privkey.pem -printf "%CY%Cm%Cd\n")
 
